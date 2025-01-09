@@ -1,0 +1,146 @@
+<%- include("./includes/head.ejs"); %>
+  
+  <style>
+    .first_cont {
+      height: 100vh;
+    }
+    
+    .g_footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .footer_a {
+      text-decoration: none;
+      color: grey;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+    }
+
+    .footer_a:hover {
+      color: black !important; /* Hover color */
+      transform: translateY(-5px); /* Small hover animation */
+    }
+    
+    @media (max-width: 800px) {
+      .first_cont {
+        margin-bottom: 80px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .first_cont {
+        margin-bottom: 200px;
+      }
+      
+      .g_footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .g_footer div {
+        margin-bottom: 10px;
+        margin-right: 30px;
+      }
+      
+      .footer_a {
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+  <header>
+		<%- include("./includes/header.ejs"); %>
+	</header>
+    
+  <section>
+    <div class="container p-5 first_cont">
+      <div class="row justify-content-center">                
+        <div class="col-12 col-xl-1 col-lg-2"></div>
+
+        <div class="col-12 col-xl-10 col-lg-8 border-0 mt-4">
+          <h3 class="text-center text-uppercase text-wrap">Your Subscriptions</h3>
+
+          <div class="mt-5">
+            <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4">
+              <% data && data.forEach(i => { %>
+                <a href="/subscribe?plan=<%= i.name %>" style="text-decoration: none;">
+                <div class="col">
+                    <div class="card h-100 p-2">
+                      <div class="card-body" style="border-radius: 6px; 
+                           background: linear-gradient(-30deg, #2564cf, #2f419a, #2f419a, #2564cf);"
+                      >
+                          <h5 class="card-title text-white"><%= i.product_name %></h5>
+                          <p class="card-text text-white" style="font-weight: 600;">FULL HD</p>
+                      </div>
+                      <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Monthly Price(USD)</small> <br />
+                          <b>
+                            <sup class="border-0 p-0" style="font-size: 10px;">
+                              $
+                            </sup>
+                            <span class="p-0"><%= Number(i.amount) / 100 %></span>
+                          </b>
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Duration</small> <br />
+                          <b>
+                            <span class="p-0 text-capitalize"><%= i.interval_count %> <%= i.interval %></span>
+                          </b>
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Resolution</small> <br />
+                          <b>Full HD</b>
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Watch on Your Phone, Tablet</small> <br />
+                          ✔
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Easy Change or Cancel</small> <br />
+                          ✔
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">ADS</small> <br />
+                          <span style="color: red; font-weight: bold;">X</span>
+                        </li>
+                    </ul>
+                      <div class="card-footer d-flex align-items-center justify-content-center">
+                        <!-- <form action="/resume_subscription" method="POST">
+                          <input type="hidden" name="s_id" value="<%= i.subscription_id %>" />
+                          <button type="submit" class="btn btn-outline-success text-uppercase" style="font-weight: 600;">
+                            resume
+                          </button>
+                        </form> -->
+                        
+                        <form action="/cancel_subscription" method="POST">
+                          <input type="hidden" name="s_id" value="<%= i.subscription_id %>" />
+                          <button type="submit" class="btn btn-outline-danger text-uppercase" style="font-weight: 600;">
+                            cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-1 col-lg-2"></div>
+      </div>
+    </div>
+  </section>
+          
+  <footer>
+		<%- include("./includes/footer.ejs"); %>
+	</footer>
+
+<%- include("./includes/end.ejs"); %>

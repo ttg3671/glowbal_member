@@ -1,0 +1,79 @@
+<%- include("./includes/head.ejs"); %>
+  
+  <style>
+    section {
+      height: 100vh;
+    }
+
+    .g_footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .footer_a {
+      text-decoration: none;
+      color: grey;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+    }
+
+    .footer_a:hover {
+      color: black !important; /* Hover color */
+      transform: translateY(-5px); /* Small hover animation */
+    }
+    
+    @media (max-width: 800px) {
+      .first_cont {
+        margin-bottom: 80px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .first_cont {
+        margin-bottom: 200px;
+      }
+      
+      .g_footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .g_footer div {
+        margin-bottom: 10px;
+        margin-right: 30px;
+      }
+      
+      .footer_a {
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+  <header>
+		<%- include("./includes/header.ejs"); %>
+	</header>
+    
+  <section>
+    <div class="container p-5 mt-3">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-4"></div>
+
+        <div class="col-12 col-md-4 border-0 p-5">
+          <a href="/customer/<%= cID %>" class="btn btn-success">CHECK INVOICE</a>
+        </div>
+
+        <div class="col-12 col-md-4"></div>
+      </div>
+    </div>
+ </section>
+    
+ <footer>
+		<%- include("./includes/footer.ejs"); %>
+	</footer>
+
+<%- include("./includes/end.ejs"); %>

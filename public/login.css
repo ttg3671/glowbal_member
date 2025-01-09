@@ -1,0 +1,181 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+body {
+    min-height: 100%;
+    /*    background: #FF4081;*/
+    /*    background: linear-gradient(to right, #FF4081, #F5F4F2);*/
+    /*    background: linear-gradient(to left, #D3D3D3, #F368E0);*/
+    font-family: Arial, sans-serif; /* Ensure a consistent font */
+}
+
+h1 {
+  color: #333;
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.loginDiv1 {
+	margin-top: 25px;
+}
+
+.input-group .btn {
+   	border-radius: 0;
+}
+
+.input-group .btn i {
+    font-size: 1rem;
+}
+
+input.form-control {
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+input.form-control:focus {
+  border-color: #f9046b;
+  box-shadow: 0 0 5px rgba(249, 4, 107, 0.6);
+}
+
+.image-upload {
+    position: relative;
+	/* display: inline-block;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.image-upload input[type="file"] {
+    display: none;
+}
+
+.image-upload-label {
+    display: block;
+    cursor: pointer;
+}
+
+.image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview::before {
+    content: "Upload Image";
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#button-container {
+  background-color: black;
+  padding: 10px; /* Optional: Add padding to adjust the size of the blue background */
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+#button-container button {
+  border: none;
+  background: black;
+  color: white;
+}
+
+.btn_deactive {
+    display: none;
+}
+
+.btn_active {
+    display: inline-block;
+}
+
+.btn.pBtn, .btn.cpBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #999;
+  font-size: 16px;
+}
+
+.btn.pBtn:hover, .btn.cpBtn:hover {
+  color: #f9046b;
+}
+
+/* Spinner */
+.loading-spinner {
+/*  display: none;*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner .spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #f9046b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Error message */
+.alert-danger {
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .form-control {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 16px;
+  }
+}

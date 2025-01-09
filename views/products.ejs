@@ -1,0 +1,174 @@
+<%- include("./includes/head.ejs"); %>
+  
+  <style>
+    .first_cont {
+      height: 100vh;
+    }
+
+    .planCol {
+      position: relative;
+      // background: linear-gradient(to bottom, #ff99cc, #f9046b);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .planCol:hover {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+      box-shadow: 0px 8px 15px rgba(249, 4, 107, 0.5); /* Add a soft shadow */
+      z-index: 2; /* Bring it above other elements */
+    }
+
+    .freeDiv {
+      display: none;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .list-group {
+      border: 0px !important;
+    }
+
+    .g_footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .footer_a {
+      text-decoration: none;
+      color: grey;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+    }
+
+    .footer_a:hover {
+      color: black !important; /* Hover color */
+      transform: translateY(-5px); /* Small hover animation */
+    }
+    
+    .first_cont {
+        margin-bottom: 30px;
+    }
+    
+    @media (max-width: 800px) {
+      .first_cont {
+        margin-bottom: 80px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .first_cont {
+        margin-bottom: 200px;
+      }
+      
+      .g_footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .g_footer div {
+        margin-bottom: 10px;
+        margin-right: 30px;
+      }
+      
+      .footer_a {
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+  <header>
+		<%- include("./includes/header.ejs"); %>
+	</header>
+    
+  <section>
+    <div class="container p-5 first_cont">
+      <div class="row justify-content-center">                
+        <div class="col-12 col-xl-1 col-lg-2"></div>
+
+        <div class="col-12 col-xl-10 col-lg-8 border-0 mt-4">
+          <h3 class="text-start text-uppercase">Choose the plan that's right for you</h3>
+
+          <div class="mt-5">
+            <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4">
+              <% plans.forEach(i => { %>
+                <div class="col planCol position-relative">
+                  <a href="/subscribe?plan=<%= i.name %>" style="text-decoration: none;">
+                    <div class="freeDiv d-none position-absolute text-center">
+                      <div class="bg-white text-fuchsia pt-1 pb-1 pe-3 ps-3" style="font-size: 14px; border-radius: 5px; color: #f9046b; font-weight: bold;">
+                        7 days free trial
+                      </div>
+                    </div>
+                    <div class="card h-100" style="border: 2px solid #f9046b; border-radius: 10px; box-shadow: 0px 4px 10px rgba(249, 4, 107, 0.3);">
+                      <div class="card-body" style="border-radius: 6px 6px 0 0; background: linear-gradient(-30deg, #f9046b, #ff80aa);">
+                        <h6 class="card-title text-white"><%= i.name %></h6>
+                        <div class="text-white" style="font-size: 12px;">Starts at</div>
+                        <p class="card-text text-white" style="font-weight: 600; font-size: 22px;">
+                          £<%= Number(i.amount) / 100 %>
+                          <span class="ms-2" style="font-weight: 500; font-size: 12px;">per <%= i.interval_count %> <%= i.interval %>/user</span>
+                        </p>
+                        <div>
+                          <small class="text-white"><%= i.description %></small>
+                        </div>
+                      </div>
+                      <ul class="list-group list-group-flush mt-3 me-3 ms-3">
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Monthly Price (GBP)</small> <br />
+                          <b>
+                            <sup class="border-0 p-0" style="font-size: 10px;">£</sup>
+                            <span class="p-0"><%= Number(i.amount) / 100 %></span>
+                          </b>
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Duration</small> <br />
+                          <b>
+                            <span class="p-0 text-capitalize"><%= i.interval_count %> <%= i.interval %></span>
+                          </b>
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Resolution</small> <br />
+                          <b>Full HD</b>
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Watch on Your Phone, Tablet</small> <br />
+                          ✔
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">Easy Change or Cancel</small> <br />
+                          ✔
+                        </li>
+                        <li class="list-group-item">
+                          <small class="text-body-secondary">ADS</small> <br />
+                          <span style="color: red; font-weight: bold;">X</span>
+                        </li>
+                      </ul>
+                      <div class="card-footer"></div>
+                    </div>
+                  </a>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-1 col-lg-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="height: 200px;"></div>
+  </section>
+            
+  <footer>
+		<%- include("./includes/footer.ejs"); %>
+	</footer>
+
+<%- include("./includes/end.ejs"); %>

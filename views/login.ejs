@@ -1,0 +1,112 @@
+<%- include("./includes/head.ejs"); %>
+
+<link rel="stylesheet" href="/login.css">
+
+<body class="bg-light">
+  <header>
+  </header>
+
+  <div class="loading-spinner" id="loadingSpinner">
+      <div class="spinner"></div>
+  </div>
+
+  <section>
+    <div class="container border-0 p-0 loginDiv1">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12 text-center">
+          <% if(errorMessage) { %>
+            <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+          <% } %>
+        </div>
+
+        <div class="col-12 col-lg-3"></div>
+
+        <div class="col-12 col-lg-6 p-4 border-0">
+          <h1 class="text-center text-uppercase">Account Login</h1>
+
+          <form action="/login" method="POST" id="form" novalidate>
+            <div class="mt-4 mb-1">
+              <label for="exampleInputEmail1" class="form-label"></label>
+              <input type="email" name="email" class="form-control p-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" value="<%= oldInput.email %>">
+            </div>
+            <div class="mb-1">
+              <label for="exampleInputPassword1" class="form-label"></label>
+              <div class="input-group">
+                <input type="password" name="password" class="form-control p-3" id="exampleInputPassword1" placeholder="Password">
+                <button type="button" class="btn pBtn position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
+                    <i class="fa-regular fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h6 class="text-center">
+                Don't have an account?
+                <a href="/register" style="text-decoration: none; color: #f9046b;">Register</a>
+              </h6>
+            </div>
+            <div class="mt-4">
+              <button type="submit" class="btn text-white w-100" id="subBtn" style="background: #f9046b; font-weight: bold;">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-12 col-lg-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let oi = '<%= JSON.stringify(oldInput) %>';
+    let msg = '<%= errorMessage %>';
+  </script>
+
+  <script>
+      window.addEventListener('load', function () {
+        // console.log("hii...");
+
+        const loadingSpinner = document.getElementById('loadingSpinner');
+          
+        loadingSpinner.style.display = 'none';
+      });
+
+      const submitButton = globalThis.document.getElementById('subBtn');
+
+      const oldInput = JSON.parse(oi.replace(/&#34;/g, '"'));
+
+      // console.log(msg);
+
+      // console.log(oldInput);
+
+      globalThis.document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('form');
+
+        document.querySelector('.pBtn').addEventListener('click', (e) => {
+          const inputGroup = e.target.closest('.input-group');
+          const input = inputGroup.querySelector('input');
+          const button = inputGroup.querySelector('button');
+
+          const type = input.type === 'password' ? 'text' : 'password';
+          input.type = type;
+
+          if (type === 'text') {
+              button.innerHTML = '<i class="fa-regular fa-eye"></i>'; // Eye icon
+          } else {
+              button.innerHTML = '<i class="fa-regular fa-eye-slash"></i>'; // Eye-slash icon
+          }
+        });
+
+        const errorMessageElement = document.querySelector(".alert");
+
+        // If the alert exists, set a timeout to remove it
+        if (msg) {
+          setTimeout(() => {
+            errorMessageElement.style.display = "none"; // Hide the alert
+          }, 3000); // 5 seconds (5000 milliseconds)
+        }
+      })
+    </script>
+</body>
+
+<%- include("./includes/end.ejs"); %>

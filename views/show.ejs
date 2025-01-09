@@ -1,0 +1,186 @@
+<%- include("./includes/head.ejs"); %>
+  
+  <style>
+    .first_cont {
+      height: 100vh;
+    }
+    
+    .g_footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .footer_a {
+      text-decoration: none;
+      color: grey;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s; /* Smooth transitions */
+    }
+
+    .footer_a:hover {
+      color: black !important; /* Hover color */
+      transform: translateY(-5px); /* Small hover animation */
+    }
+    
+    @media (max-width: 800px) {
+      .first_cont {
+        margin-bottom: 80px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .first_cont {
+        margin-bottom: 200px;
+      }
+      
+      .g_footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      
+      .g_footer div {
+        margin-bottom: 10px;
+        margin-right: 30px;
+      }
+      
+      .footer_a {
+        font-size: 14px;
+      }
+    }
+  </style>
+  
+  <header>
+		<%- include("./includes/header.ejs"); %>
+	</header>
+    
+  <section>
+    <div class="container pe-4 ps-4 pt-1 pb-1 first_cont">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-3"></div>
+
+        <div class="col-12 col-sm-6 pt-5">
+          <div class="col-12 text-center mt-3 mb-3">
+            <% if (success_msg != '') { %>
+                <div class="alert alert-success" role="alert"><%= success_msg %></div>
+            <% } %>
+
+            <% if (error_msg != '') { %>
+                <div class="alert alert-danger" role="alert"><%= error_msg %></div>
+            <% } %>
+          </div>
+
+          <div class="col-12 mt-5 d-flex flex-column justify-content-center">
+            <div class="mb-3 d-flex flex-column">
+              <h6>1. If you've already created an account through the app:
+              </h6>
+              <a href="#" id="app_link1" style="text-decoration: none; text-align: center;">
+                <img src="/gc1.jpg" class="img-fluid" width="330" height="400" />
+              </a>
+              <p class="text-center mt-3" style="font-weight: 500;">
+                Please press the "Continue" button on the app to proceed.
+              </p>
+            </div>
+
+            <div class="mb-3 d-flex flex-column">
+              <h6>2. If you don't have an account:
+              </h6>
+              <a href="#" id="app_link2" style="text-decoration: none; text-align: center;">
+                <img src="/gc2.jpg" class="img-fluid" width="250" height="300" />
+              </a>
+              <p class="text-center mt-2" style="font-weight: 500;">
+                Log in with your email and password on the app.
+              </p>
+            </div>
+
+            <div class="mb-3 d-flex flex-column">
+              <h6>3. Once logged in:
+              </h6>
+              <a href="#" id="app_link3" style="text-decoration: none; text-align: center;">
+                <img src="/gc3.jpg" class="img-fluid" width="250" height="300" />
+              </a>
+              <p class="text-center mt-3" style="font-weight: 500;">
+                Enjoy watching the "Standing on Business" episodes.
+              </p>
+            </div>
+
+            <div class="mb-3 d-flex flex-column">
+              <h6>4. Or Continue with website:
+              </h6>
+              <a href="/videos" class="btn btn-outline-success mt-2 text-center" style="text-decoration: none; color: black;">Continue with Website</a>
+            </div>
+          </div>
+
+
+          <div class="col-12" style="height: 100px;"></div>
+
+          <!-- <div class="col-12 mt-2 d-flex flex-column justify-content-center">
+            <div class="mb-4">
+              <a href="#" class="btn btn-outline-success" style="text-decoration: none; color: black;">Continue with App</a>
+            </div>
+
+            <div class="mb-4">
+              <a href="/videos" class="btn btn-outline-success" style="text-decoration: none; color: black;">Continue with Website</a>
+            </div>
+          </div> -->
+
+        </div>
+
+        <div class="col-12 col-sm-3"></div>
+      </div>
+    </div>
+  </section>
+                
+  <script>
+    globalThis.document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+          const alertElements = document.querySelectorAll('.alert-success, .alert-danger');
+          alertElements.forEach(function(alertElement) {
+              alertElement.style.display = 'none';
+          });
+      }, 3000); // 3000 milliseconds = 3 seconds
+
+        function getMobileOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check for iOS
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return "iOS";
+            }
+
+            // Check for Android
+            if (/android/i.test(userAgent)) {
+                return "Android";
+            }
+
+            return "Unknown";
+        }
+
+        const os = getMobileOS();
+        // console.log(os);
+
+        const appLink1 = document.querySelector('#app_link1');
+        const appLink2 = document.querySelector('#app_link2');
+        const appLink3 = document.querySelector('#app_link3');
+
+        // Check the OS and update the link accordingly
+        if (os === "iOS") {
+          appLink1.href = "https://apps.apple.com/app/glowbal-network/id6737516777";
+          appLink2.href = "https://apps.apple.com/app/glowbal-network/id6737516777";
+          appLink3.href = "https://apps.apple.com/app/glowbal-network/id6737516777";
+        }
+
+        else {
+          appLink1.href = "https://play.google.com/store/apps/details?id=co.uk.glowbalnetwork";
+          appLink2.href = "https://play.google.com/store/apps/details?id=co.uk.glowbalnetwork";
+          appLink3.href = "https://play.google.com/store/apps/details?id=co.uk.glowbalnetwork";
+        }
+
+    })
+  </script>
+
+<%- include("./includes/end.ejs"); %>
